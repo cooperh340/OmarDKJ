@@ -9,9 +9,7 @@ from stats import add_usage
 
 def process_file(vector_store, file, loader_class, file_suffix, stats_db=None):
     documents = []
-    file_sha = ""
-    file_name = file.name
-    file_size = file.size
+    file_sha = ""   file_size = file.size
     if st.secrets.self_hosted == "false":
         if file_size > 1000000:
             st.error("File size is too large. Please upload a file smaller than 1MB or self host.")
@@ -27,7 +25,6 @@ def process_file(vector_store, file, loader_class, file_suffix, stats_db=None):
     os.remove(tmp_file.name)
     
     chunk_size = st.session_state['chunk_size']
-    chunk_overlap = st.session_state['chunk_overlap']
 
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     
